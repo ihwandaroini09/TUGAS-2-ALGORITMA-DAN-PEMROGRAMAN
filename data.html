@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program Gaji Karyawan</title>
+</head>
+<body>
+
+    <h2>Perhitungan Gaji Karyawan</h2>
+
+    <script>
+
+        // Input Golongan dan Jam Lembur
+        let golongan = prompt("Masukkan Golongan Karyawan (A/B/C):");
+        let lembur = parseInt(prompt("Masukkan Jam Lembur:"));
+
+        let gajiPokok = 0;
+        let persenLembur = 0;
+        let gajiLembur = 0;
+        let totalGaji = 0;
+
+        // Menentukan Gaji Pokok
+        if (golongan == "A" || golongan == "A") {
+            gajiPokok = 5000000;
+        } 
+        else if (golongan == "B" || golongan == "B") {
+            gajiPokok = 6500000;
+        } 
+        else if (golongan == "C" || golongan == "C") {
+            gajiPokok = 9500000;
+        } 
+        else {
+            alert("Golongan tidak valid!");
+        }
+
+        // Menentukan Persen Lembur
+        if (lembur == 1) {
+            persenLembur = 0.30;
+        }
+        else if (lembur == 2) {
+            persenLembur = 0.32;
+        }
+        else if (lembur == 3) {
+            persenLembur = 0.34;
+        }
+        else if (lembur == 4) {
+            persenLembur = 0.36;
+        }
+        else if (lembur >= 5) {
+            persenLembur = 0.38;
+        }
+
+        // Menghitung Gaji Lembur
+        gajiLembur = gajiPokok * persenLembur;
+
+        // Menghitung Total Gaji
+        totalGaji = gajiPokok + gajiLembur;
+
+        // Output
+        document.write("<h3>Hasil Perhitungan</h3>");
+        document.write("Golongan Karyawan : " + golongan + "<br>");
+        document.write("Gaji Pokok : Rp. " + gajiPokok + "<br>");
+        document.write("Jam Lembur : " + lembur + " Jam<br>");
+        document.write("Gaji Lembur : Rp. " + gajiLembur + "<br>");
+        document.write("Total Penghasilan : Rp. " + totalGaji);
+
+    </script>
+
+</body>
