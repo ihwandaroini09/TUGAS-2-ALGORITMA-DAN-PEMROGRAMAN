@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracking DO</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="trackingApp" class="container">
+
+        <h1>Tracking Delivery Order</h1>
+
+        <!-- FORM -->
+
+        <div class="form-box">
+
+            <input
+                type="text"
+                v-model="form.nomorDO"
+                readonly>
+
+            <input
+                type="text"
+                v-model="form.nim"
+                placeholder="Masukkan NIM">
+
+            <input
+                type="text"
+                v-model="form.nama"
+                placeholder="Masukkan Nama">
+
+            <!-- EKSPEDISI -->
+
+            <select v-model="form.ekspedisi">
+
+                <option value="">
+                    Pilih Ekspedisi
+                </option>
+
+                <option
+                    v-for="item in pengirimanList"
+                    :key="item.kode"
+                    :value="item.nama">
+
+                    {{ item.nama }}
+
+                </option>
+
+            </select>
+
+            <!-- PAKET -->
+
+            <select v-model="selectedPaket">
+
+                <option value="">
+                    Pilih Paket
+                </option>
+
+                <option
+                    v-for="item in paket"
+                    :key="item.kode"
+                    :value="item">
+
+                    {{ item.kode }} -
+                    {{ item.nama }}
+
+                </option>
+
+            </select>
+
+            <!-- DETAIL PAKET -->
+
+            <div v-if="selectedPaket">
+
+                <h3>Isi Paket:</h3>
+
+                <ul>
+
+                    <li
+                        v-for="isi in selectedPaket.isi"
+                        :key="isi">
+
+                        {{ isi }}
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- TANGGAL -->
+
+            <input
+                type="date"
+                v-model="form.tanggalKirim">
+
+            <!-- TOTAL -->
+
+            <input
+                type="number"
+                v-model="form.total"
+                readonly>
+
+            <button @click="tambahTracking">
+                Tambah Tracking
+            </button>
+
+        </div>
+
+        <!-- LIST TRACKING -->
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Nomor DO</th>
+                    <th>Nama</th>
+                    <th>Ekspedisi</th>
+                    <th>Paket</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Perjalanan</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr
+                    v-for="(item,key) in tracking"
+                    :key="key">
+
+                    <td>{{ key }}</td>
+
+                    <td>{{ item.nama }}</td>
+
+                    <td>{{ item.ekspedisi }}</td>
+
+                    <td>{{ item.paket }}</td>
+
+                    <td>
+                        Rp {{ item.total }}
+                    </td>
+
+                    <td>
+
+                        {{ item.status }}
+
+                    </td>
+
+                    <td>
+
+                        <ul>
+
+                            <li
+                                v-for="jalan in item.perjalanan"
+                                :key="jalan.waktu">
+
+                                {{ jalan.waktu }}
+                                -
+                                {{ jalan.keterangan }}
+
+                            </li>
+
+                        </ul>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- DATA -->
+    <script src="js/dataBahanAjar.js"></script>
+
+    <!-- LOGIC -->
+    <script src="js/tracking-app.js"></script>
+
+</body>
+</html>
